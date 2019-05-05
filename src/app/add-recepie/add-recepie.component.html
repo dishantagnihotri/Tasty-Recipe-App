@@ -1,0 +1,106 @@
+<div fxLayout="column"
+     [ngStyle]="{ 'padding-top': '50px','padding-bottom':'50px' }">
+        
+  <mat-card fxFlex.lt-sm="100"
+            fxFlex.sm="90"
+            fxFlex.gt-sm="90"
+            [ngStyle]="{ 'margin-top':'50px' }">  
+          
+    <mat-card-title class="mat-display-1">Add a new Recepie</mat-card-title>
+    <br>
+    <form [formGroup]="exampleForm"     
+          type="multipart/form-data" 
+          method="POST">
+    <p> 
+      <mat-form-field appearance="outline">
+        <mat-label>Enter Recipe Name</mat-label>
+
+        <input matInput 
+                placeholder="Eg: Pizaa" 
+                type="text" 
+                autocomplete="off"
+                formControlName="recepieName"
+                required>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter Recipe About</mat-label>
+          <input matInput 
+                  placeholder="Enter a small description about recipe" 
+                  type="text" 
+                  autocomplete="off"   
+                  formControlName="recepieAbout"
+                  required>
+      </mat-form-field>
+    </p>
+    <p> 
+      <mat-form-field class="example-chip-list" appearance="outline">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let ingredient of ingredients" 
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="remove(ingredient)">
+              {{ingredient.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Enter Ingredients"
+                    hintLabel="Enter an ingredient & press enter or seprate it with comma"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-card class="process">
+        <mat-card-header>
+          <mat-card-title>Enter your Recipe Process</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list *ngFor="let p of process;let i=index">
+                <mat-list-item *ngIf="process.length > 0">
+                    <mat-icon matListIcon matSuffix>label</mat-icon>
+                    <p matLine>
+                      <span class="mat-body-strong"><b>Step {{ i+1 }}</b>:</span>
+                      <span class="mat-body"> {{ p.step }} </span>
+                    </p>
+                    <button mat-icon-button 
+                            (click)="deleteProcess(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                  </mat-list-item>
+            </mat-list>
+          </mat-card-content> 
+          <mat-card-footer>
+            <mat-form-field appearance="outline"> 
+              <textarea matInput 
+                        cdkTextareaAutosize
+                        #processVal 
+                        name="process"
+                        [value]="processValText"
+                        (keydown.enter)="addProcess(processVal.value)"
+                        placeholder="Enter Next Process"
+                        formControlName="recepieProcess"          
+                        hintLabel="Enter a process & press enter to add it inside the list">
+              </textarea>
+            </mat-form-field>
+        </mat-card-footer>
+    </mat-card>
+    </p>
+
+    <lib-image-uploader></lib-image-uploader>
+    <p>
+      <button 
+        mat-raised-button
+        type="button"
+        color="primary"
+        (click)="onSubmit($event)"
+        [ngStyle]="{ 'margin-top':'20px' }">Submit
+      </button>   
+    </p>
+
+    </form>
+    </mat-card>
+</div>

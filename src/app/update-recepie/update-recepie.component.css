@@ -1,0 +1,17 @@
+.mat-card.add-recepie-holder{
+    width: 80%;
+    margin: 0 auto;
+}
+.mat-card.add-recepie-holder .row{
+    margin: 20px 10px;
+}
+.mat-card.add-recepie-holder .row h3{
+    margin-bottom: 15px;
+}
+.mat-card.add-recepie-holder .row mat-checkbox.mat-checkbox{
+    margin-right: 10px;
+}
+
+.mat-form-field{
+    width: 100%;
+}

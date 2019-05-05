@@ -1,0 +1,48 @@
+<!-- layout container: start -->
+<div fxLayout="row wrap"
+     fxLayout.xs="column"
+     fxLayout.sm="column"
+     fxLayout.md="row wrap"
+     fxLayout.lg="row wrap"
+     fxLayout.xs="row wrap"
+     fxLayoutAlign="space-evenly start"
+     [ngStyle]="{ 'padding-top': '50px','padding-bottom':'50px' }">
+            <!-- mat-card: begin -->
+
+            <mat-card *ngFor="let recepie of recepies.slice().reverse()"
+            fxFlex.xs="90"
+            fxFlex.sm="90"
+            fxFlex.md="30"
+            fxFlex.lg="23"
+            fxFlex.xl="18"
+            [routerLink]="['/recepie/',recepie._id]" 
+            class="card"
+            [ngStyle]="{'margin-top': '20px', 'margin-bottom': '20px','margin-right':'0'}">  
+                <img mat-card-image 
+                     [ngStyle]="{'height.px': 150}"
+                     src="{{ recepie.recepieImgPath }}">
+                <mat-card-title-group>
+                    <mat-card-title>{{ recepie.recepieName }}</mat-card-title>
+                    <mat-card-subtitle>{{ recepie.recepieAbout }}</mat-card-subtitle>
+                </mat-card-title-group>
+                <mat-card-actions align="center">
+                        <button mat-raised-button
+                                color="primary" 
+                                aria-label="Edit Recepie"  
+                                [routerLink]="['/update-recepie', recepie._id]">
+                                        <mat-icon>edit</mat-icon>
+                                        Edit
+                        </button>
+                        <button mat-raised-button 
+                                color="primary"
+                                aria-label="Delete Recepie"
+                                (click)="deleteRecepie(recepie._id)">
+                                <mat-icon>delete</mat-icon>
+                                Delete
+
+                        </button>          
+                </mat-card-actions>
+            </mat-card>
+            <!-- mat-card: end -->
+</div>
+<!-- layour container: end -->

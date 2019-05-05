@@ -1,0 +1,47 @@
+<div fxLayout="column">
+          <mat-card fxFlex.xs="100"
+                    fxFlex.sm="90"
+                    fxFlex.md="80"
+                    fxFlex.lg="70"
+                    fxFlex.xl="70"
+                    [ngStyle]="{ 'margin-top':'50px' }">
+                
+                <img mat-card-image
+                     src="{{ recepie.recepieImgPath }}"
+                     [ngStyle]="{'max-height':'250px'}">
+
+                <mat-card-header>
+                    <mat-card-title class="mat-display-1">{{ recepie.recepieName }}</mat-card-title>
+                    <mat-card-subtitle class="mat-body">{{ recepie.recepieAbout }}</mat-card-subtitle>
+                </mat-card-header>
+                
+                <mat-divider></mat-divider>
+                <mat-card-content>               
+                    <div class="card-content">
+                        <mat-card [ngStyle]="{ 'margin-top':'10px','margin-bottom':'10px' }">
+                            <mat-card-title class="mat-display-1"
+                                            [ngStyle]="{'padding':'0','padding-bottom':'10px'}">Ingredients Used:</mat-card-title>
+                            <mat-list *ngFor="let ing of recepie.recepieIngredients"
+                                        [ngStyle]="{ 'width': 'auto',
+                                        'display': 'inline-block',
+                                        'background-color': '#eee',
+                                        'padding': '0',
+                                        'border-radius': '5px',
+                                        'margin-right': '10px',
+                                        'margin-bottom':'10px' }">
+                                <mat-list-item>{{ ing['name'] }}</mat-list-item>
+                            </mat-list>
+                        </mat-card>
+                        <mat-card [ngStyle]="{ 'margin-top':'10px','margin-bottom':'10px' }">
+                            <mat-card-title class="mat-display-1" 
+                                            [ngStyle]="{'margin':'0',
+                                            'padding-top':'10px',
+                                            'padding-bottom':'10px'}">Process to make</mat-card-title>
+                            <mat-list *ngFor="let step of recepie.recepieProcess;let i=index">
+                                <mat-list-item><span class="mat-body-strong"><b>Step {{ i+1 }}</b></span>: {{ step['step'] }}</mat-list-item>
+                            </mat-list>
+                        </mat-card>
+                    </div>
+                </mat-card-content>
+          </mat-card>
+  </div>

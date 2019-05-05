@@ -1,0 +1,102 @@
+<div fxLayout="column"
+     [ngStyle]="{ 'padding-top': '50px','padding-bottom':'50px' }">
+        
+  <mat-card fxFlex.xs="100"
+            fxFlex.sm="90"
+            fxFlex.md="80"
+            fxFlex.lg="70"
+            fxFlex.xl="70"
+            [ngStyle]="{ 'margin-top':'50px' }">   
+      <mat-card-title class="mat-display-1">Edit Recepie: {{ recepie.recepieName }}</mat-card-title>
+      <br>
+
+      <form (ngSubmit)="updateRecepie(recepie._id, recepie)" #recepieForm="ngForm">
+      <p> 
+        <mat-form-field appearance="outline">
+          <mat-label>Enter Recipe Name</mat-label>
+
+          <input matInput 
+                placeholder="Eg: Pizaa" 
+                type="text" 
+                autocomplete="off"
+                [(ngModel)]="recepie.recepieName"
+                name="recepieName">
+      </mat-form-field>
+      </p>
+      <p>
+      <mat-form-field appearance="outline">
+          <mat-label>Enter Recipe About</mat-label>
+            <input matInput 
+                  placeholder="Enter a small description about recipe" 
+                  type="text" 
+                  autocomplete="off"   
+                  [(ngModel)]="recepie.recepieAbout"
+                  name="recepieAbout">
+      </mat-form-field>
+      </p>
+      <p> 
+      <mat-form-field class="example-chip-list" appearance="outline">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let ingredient of recepie.recepieIngredients" 
+                        [selectable]="selectable"
+                        [removable]="removable" 
+                        (removed)="remove(ingredient)">
+                {{ingredient.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Enter Ingredients"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+      </mat-form-field>
+      </p>
+      <p>
+      <mat-card class="process">
+          <mat-card-header>
+            <mat-card-title>Enter your Recipe Process</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+              <mat-list *ngFor="let process of recepie.recepieProcess;let i=index">
+                  <mat-list-item>
+                      <mat-icon matListIcon matSuffix>label</mat-icon>
+                      <p matLine>
+                        <span class="mat-body-strong"><b>Step {{ i+1 }}</b>:</span>
+                        <span class="mat-body">{{ process['step'] }}</span>
+                      </p>
+                      <button mat-icon-button 
+                              (click)="deleteProcess(i)">
+                          <mat-icon>delete</mat-icon>
+                      </button>
+                    </mat-list-item>
+              </mat-list>
+          </mat-card-content>
+          <mat-card-footer>
+              <mat-form-field appearance="outline"> 
+                <textarea matInput 
+                          cdkTextareaAutosize
+                          #processVal
+                          name="process"
+                          (keydown.enter)="addProcess(processVal.value)"
+                          placeholder="Enter Next Process">
+                </textarea>
+              </mat-form-field>
+          </mat-card-footer>
+      </mat-card>
+      </p>
+      <p>    
+      <img src="/assets/default.jpg">
+     
+      </p>
+    <p>
+        <button 
+          mat-raised-button
+          type="submit"
+          [ngStyle]="{ 'margin-top':'10px' }">Submit
+        </button>   
+    </p>
+
+    </form>
+    </mat-card>
+</div>

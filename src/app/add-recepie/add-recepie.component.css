@@ -1,0 +1,22 @@
+.mat-card{
+    width: 80%;
+    margin: 0 auto;    
+}
+.mat-form-field{
+    width: 100%;
+}
+.mat-card.process{
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 2%
+}
+.mat-card.process .mat-card-footer{
+    margin: 0
+}
+.mat-card.image-uploader{
+    width: 100%;
+    margin-top: 30px;
+}
+.mat-card button{
+    margin-top: 30px;
+}
